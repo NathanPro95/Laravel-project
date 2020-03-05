@@ -225,13 +225,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('schedule.list')}}" class="nav-link">
+                <a href="{{route('user.list')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách người dùng</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('schedule.create')}}" class="nav-link">
+                <a href="{{route('user.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tạo người dùng mới</p>
                 </a>

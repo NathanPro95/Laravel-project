@@ -30,4 +30,12 @@ Route::group(['namespace', 'prefix' => 'manageSchedule'], function() {
 
         Route::post('import',['as' => 'schedule.import', 'uses' => 'ImportExcelController@import']);
     });
+    Route::group(['prefix' => 'user'], function() {
+        Route::get('/',['as' => 'user.list', 'uses' => 'UserController@index']);
+        Route::post('delete/{id}',['as' => 'user.delete', 'uses' => 'UserController@delete']);
+        Route::get('edit/{id}',['as' => 'user.edit', 'uses' => 'UserController@edit']);
+        Route::get('create',['as' => 'user.create', 'uses' => 'UserController@create']);
+        Route::post('store',['as' => 'user.store', 'uses' => 'UserController@store']);
+        Route::post('update/{id}',['as' => 'user.update', 'uses' => 'UserController@update']);
+    });
 });

@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="container">
+<div class="row">
+        <div class="col-md-12">
+            <div class="card">
             <form method="post" action="{{empty($schedule['id']) ? route('schedule.store') : route('schedule.update',$schedule['id'])}}" role="form">
             @csrf
                 <div class="card-body">
