@@ -27,8 +27,14 @@
                                 <td>{{$user['created_at'] != null ? date('d-m-Y',strtotime($user['created_at'])) : ""}}</td>
                                 <td>{{$user['updated_at'] != null ? date('d-m-Y',strtotime($user['updated_at'])) : ""}}</td>
                                 <td>
-                                    <a href="{{route('user.edit',$user['id'])}}">Edit</a>
-                                    <a href="{{route('user.delete',$user['id'])}}" onclick="return confirm('Are you sure to delete user '+'{{$user['name']}}' + '?');">Delete</a>
+                                    <a href="{{route('user.edit',$user['id'])}}" style="float: left;margin-right: 5px;" title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                    @if($user['role_id'] != 1)
+                                        <form action="{{ route('user.delete', $user->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button style="background: unset;border: unset;color: #f70707;" onclick="return confirm('Are you sure to delete user '+'{{$user['name']}}' + '?');" type="submit" title="Xóa"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

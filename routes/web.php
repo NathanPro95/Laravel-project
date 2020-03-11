@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['namespace', 'prefix' => 'manageSchedule'], function() {
     Route::group(['prefix' => 'schedule'], function() {
         Route::get('/',['as' => 'schedule.list', 'uses' => 'ScheduleController@index']);
-        Route::post('delete/{id}',['as' => 'schedule.delete', 'uses' => 'ScheduleController@delete']);
+        Route::delete('delete/{id}',['as' => 'schedule.delete', 'uses' => 'ScheduleController@delete']);
         Route::get('edit/{id}',['as' => 'schedule.edit', 'uses' => 'ScheduleController@edit']);
         Route::get('create',['as' => 'schedule.create', 'uses' => 'ScheduleController@create']);
         Route::post('store',['as' => 'schedule.store', 'uses' => 'ScheduleController@store']);
@@ -32,7 +32,7 @@ Route::group(['namespace', 'prefix' => 'manageSchedule'], function() {
     });
     Route::group(['prefix' => 'user'], function() {
         Route::get('/',['as' => 'user.list', 'uses' => 'UserController@index']);
-        Route::post('delete/{id}',['as' => 'user.delete', 'uses' => 'UserController@delete']);
+        Route::delete('delete/{id}',['as' => 'user.delete', 'uses' => 'UserController@delete']);
         Route::get('edit/{id}',['as' => 'user.edit', 'uses' => 'UserController@edit']);
         Route::get('create',['as' => 'user.create', 'uses' => 'UserController@create']);
         Route::post('store',['as' => 'user.store', 'uses' => 'UserController@store']);

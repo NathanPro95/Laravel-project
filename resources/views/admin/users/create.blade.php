@@ -7,6 +7,15 @@
             <form method="post" action="{{empty($user['id']) ? route('user.store') : route('user.update',$user['id'])}}" role="form">
             @csrf
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div><br />
+                    @endif
                     <div class="form-group">
                         <label for="name">Tên người dùng</label>
                         <input type="text" name="name" value="{{!empty($user['name']) ? $user['name'] : "" }}"  class="form-control" placeholder="Enter user name">

@@ -23,8 +23,13 @@ class ScheduleController extends Controller
     }
     public function delete(Request $request)
     {
-        $this->model->delete($request->id);
-        # code...
+        $schedule = schedule::findOrFail($request->id);
+        $result = $schedule->delete();
+        if($result){
+            return redirect('/manageSchedule/schedule')->with('success','Schedule deleted successfully');
+        }else{
+            return redirect('/manageSchedule/schedule')->with('failed','Schedule deleted failed');
+        }
     }
     /**
      * Show the form for creating a new resource.
@@ -34,13 +39,6 @@ class ScheduleController extends Controller
     public function create()
     {
         return view('admin/schedules/create');
-        // $scheduleDB = $this->model;
-        // $scheduleDB->schedule_name = $request->schedule_name;
-        // $scheduleDB->schedule_status = $request->schedule_status;
-        // if($scheduleDB->save()){
-        //     return redirect('quanly/schedule');
-        // }
-        # code...
     }
     /**
      * Store a newly created resource in storage.
