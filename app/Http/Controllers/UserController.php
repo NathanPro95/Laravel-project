@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     function __construct(user $user)
     {
+        $this->middleware('auth');
         $this->model = $user;
     }
     /**
@@ -57,7 +59,7 @@ class UserController extends Controller
         $user = new User([
             'name'=> $request->get('name'),
             'email'=> $request->get('email'),
-            'password'=> $request->get('password'),
+            'password'=> Hash::make($request->get('password')),
             'role_id'=> $request->get('role_id'),
         ]);
         $user->save();

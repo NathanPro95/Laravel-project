@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\schedule;
+use App\models\Schedule;
 
 class ScheduleController extends Controller
 {
-    function __construct(schedule $schedule)
+    function __construct(Schedule $schedule)
     {
+        $this->middleware('auth');
         $this->model = $schedule;
     }
     /**
@@ -23,7 +24,9 @@ class ScheduleController extends Controller
     }
     public function delete(Request $request)
     {
-        $schedule = schedule::findOrFail($request->id);
+        $user = $request->user();
+        dd($user->hasRole('admin'));
+        $schedule = Schedule::findOrFail($request->id);
         $result = $schedule->delete();
         if($result){
             return redirect('/manageSchedule/schedule')->with('success','Schedule deleted successfully');
@@ -52,7 +55,7 @@ class ScheduleController extends Controller
             'schedule_name'=>'required',
             'schedule_status'=>'required'
         ]);
-        $schedule = new schedule([
+        $schedule = new Schedule([
             'schedule_name'=> $request->get('schedule_name'),
             'contract_date'=> $request->get('contract_date'),
             'valuable'=> $request->get('valuable'),

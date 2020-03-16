@@ -12,7 +12,8 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-            'role' => 'Admin',
+            'name' => 'Admin',
+            'slug' => 'admin',
             'created_at'=> date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s')
         ]);
