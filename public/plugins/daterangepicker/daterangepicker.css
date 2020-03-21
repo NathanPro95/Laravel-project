@@ -408,3 +408,13 @@
     clear: none !important;
   }
 }
+
+.schedule{
+    margin: 20px 0 5px 0;
+}
+.text-update{
+    font-size: 20px;
+}
+.height-track{
+    height: 160px;
+}

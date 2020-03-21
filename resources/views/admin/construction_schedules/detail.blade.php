@@ -1,36 +1,69 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="row">
-        <div class="col-md-12">
-            <div class="card">
-            <form method="post" action="{{empty($schedule['id']) ? route('schedule.store') : route('schedule.update',$schedule['id'])}}" role="form">
-            @csrf
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="scheduleName">Handover Report</label>
-                        <input type="text" name="schedule_name" value="{{!empty($schedule['schedule_name']) ? $schedule['schedule_name'] : "" }}"  class="form-control" placeholder="Enter schedule name">
-                    </div>
-                    <div class="form-group">
-                        <label for="contractDate">Expected Complete Date</label>
-                        <input type="date" name="contract_date" value="{{!empty($schedule['contract_date']) ? date('yyyy-MM-dd', strtotime($schedule['contract_date'])) : "" }}" class="form-control" >
-                    </div>
-                    <div class="form-group">
-                        <label for="valuable">Note</label>
-                        <textarea style="width: 100%"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="endDate">End date</label>
-                        <input type="date" name="end_date" value="{{!empty($schedule['end_date']) ? $schedule['end_date'] : "" }}" class="form-control" placeholder="Enter schedule status">
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info height-track">
+                <div class="inner">
+                    <h3>{{$detailTrackProgress['handover_gorund']}}<sup style="font-size: 20px">%</sup> <p>Bàn Giao Mặt Bằng</p></h3>
+                    <div class="progress schedule">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{$detailTrackProgress['handover_gorund']}}%"
+                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">{{$detailTrackProgress['handover_gorund']}}%</div>
                     </div>
                 </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
                 </div>
-            </form>
+                <a href="{{route('construction.detailwork', $detailTrackProgress['work_id']['gorund'])}}" class="small-box-footer text-update">Cập nhật tiến độ <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info height-track">
+                <div class="inner">
+                    <h3>{{$detailTrackProgress['handover_of_subpplies']}}<sup style="font-size: 20px">%</sup> <p>Bàn Giao Vật Tư</p></h3>
+                    <div class="progress schedule">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{$detailTrackProgress['handover_of_subpplies']}}%"
+                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">{{$detailTrackProgress['handover_of_subpplies']}}%</div>
+                    </div>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="{{route('construction.detailwork', $detailTrackProgress['work_id']['subpplies'])}}" class="small-box-footer text-update">Cập nhật tiến độ <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info height-track">
+                <div class="inner">
+                    <h3>{{$detailTrackProgress['construction']}}<sup style="font-size: 20px">%</sup> <p>Thi Công</p></h3>
+                    <div class="progress schedule">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{$detailTrackProgress['construction']}}%"
+                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">{{$detailTrackProgress['construction']}}%</div>
+                    </div>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="{{route('construction.detailwork', $detailTrackProgress['work_id']['construction'])}}" class="small-box-footer text-update">Cập nhật tiến độ <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger height-track">
+                <div class="inner">
+                    <h3>{{$detailTrackProgress['sum']}}<sup style="font-size: 20px">%</sup> <p>Kết Thúc</p></h3>
+                    <div class="progress schedule">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{$detailTrackProgress['sum']}}%"
+                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">{{$detailTrackProgress['sum']}}%</div>
+                    </div>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 @endsection

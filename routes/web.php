@@ -42,4 +42,11 @@ Route::group(['namespace', 'prefix' => 'manageSchedule'], function() {
         });
         Route::get('/',['as' => 'user.list', 'uses' => 'UserController@index']);
     });
+    Route::group(['prefix' => 'construction'], function() {
+        Route::get('/',['as' => 'construction.list', 'uses' => 'ConstructionController@index']);
+        Route::get('detail/{id}',['as' => 'construction.detail', 'uses' => 'ConstructionController@detail']);
+        Route::get('detail-work/{id}',['as' => 'construction.detailwork', 'uses' => 'ConstructionController@detailWork']);
+        Route::get('update/{id}',['as' => 'construction.update', 'uses' => 'ConstructionController@getUpdate']);
+        Route::post('update',['as' => 'construction.post.update', 'uses' => 'ConstructionController@postUpdate']);
+    });
 });
