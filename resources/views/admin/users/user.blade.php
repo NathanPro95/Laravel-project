@@ -31,11 +31,13 @@
                                 @role('admin')
                                     <td>
                                         <a href="{{route('user.edit',$user['id'])}}" style="float: left;margin-right: 5px;" title="Cập nhật"><i class="fa fa-edit"></i></a>
-                                        <form action="{{ route('user.delete', $user->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button style="background: unset;border: unset;color: #f70707;" onclick="return confirm('Are you sure to delete user '+'{{$user['name']}}' + '?');" type="submit" title="Xóa"><i class="fa fa-trash"></i></button>
-                                        </form>
+                                        @if(auth()->user()->id !== $user->id)
+                                            <form action="{{ route('user.delete', $user->id)}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button style="background: unset;border: unset;color: #f70707;" onclick="return confirm('Are you sure to delete user '+'{{$user['name']}}' + '?');" type="submit" title="Xóa"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        @endif
                                     </td>
                                 @endrole
                             </tr>

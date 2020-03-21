@@ -24,17 +24,23 @@
                         <label for="email">Email</label>
                         <input type="email" name="email" placeholder="Nhập email" value="{{!empty($user['email']) ? $user['email'] : "" }}" class="form-control" >
                     </div>
-                    <div class="form-group">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" name="password" value="{{!empty($user['password']) ? $user['password'] : "" }}"  class="form-control" placeholder="Nhập mật khẩu">
-                    </div>
-                    <div class="form-group">
-                        <label for="repassword">Nhập lại mật khẩu</label>
-                        <input type="password" name="repassword"  class="form-control" placeholder="Nhập lại mật khẩu">
-                    </div>
+                    @if(empty($user['id']))
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" name="password" value="{{!empty($user['password']) ? $user['password'] : "" }}"  class="form-control" placeholder="Nhập mật khẩu">
+                        </div>
+                        <div class="form-group">
+                            <label for="repassword">Nhập lại mật khẩu</label>
+                            <input type="password" name="repassword"  class="form-control" placeholder="Nhập lại mật khẩu">
+                        </div>
+                    @endif
                     <div class="form-group">
                         <label for="role">Phân quyền</label>
-                        <input type="text" name="role_id" value="{{!empty($user['role_id']) ? $user['role_id'] : "" }}"  class="form-control" placeholder="Nhập role">
+                        <select class="form-control" name="role_id">
+                            @foreach($lstRole as $role)
+                                <option value="{{$role->id}}" {{ !empty($user['role_id']) ? $user['role_id'] == $role->id ? 'selected' : '' : ''}}>{{$role->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <!-- /.card-body -->

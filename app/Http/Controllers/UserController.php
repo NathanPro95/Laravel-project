@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -40,7 +41,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin/users/create');
+        $lstRole = Role::all();
+        return view('admin/users/create',compact('lstRole'));
     }
     /**
      * Store a newly created resource in storage.
@@ -75,7 +77,8 @@ class UserController extends Controller
     {
         //
         $user = $this->model->find($id);
-        return view('admin/users/create', compact('user'));
+        $lstRole = Role::all();
+        return view('admin/users/create', compact(['user','lstRole']));
     }
     /**
      * Update the specified resource in storage.
@@ -89,7 +92,6 @@ class UserController extends Controller
         $user = $this->model->find($id);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->password = $request->get('password');
         $user->role_id = $request->get('role_id');
         $user->update();
         return redirect('/manageSchedule/user')->with('success','User saved successfully');
