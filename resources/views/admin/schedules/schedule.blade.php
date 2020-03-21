@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -30,7 +29,9 @@
                                 <th>Plan</th>
                                 <th>Status</th>
                                 <th>End date</th>
-                                <th>Process</th>
+                                @role('admin')
+                                    <th>Process</th>
+                                @endrole
                             </tr>
                         </thead>
                         <tbody>
@@ -43,10 +44,16 @@
                                 <td>{{$schedule['construction_plan'] != null ? $schedule['construction_plan'] : ""}}</td>
                                 <td>{{$schedule['schedule_status']}}</td>
                                 <td>{{$schedule['end_date'] != null ? date('d-m-Y',strtotime($schedule['end_date'])) : ""}}</td>
-                                <td>
-                                    <a href="{{route('schedule.edit',$schedule['id'])}}">Edit</a>
-                                    <a href="{{route('schedule.delete',$schedule['id'])}}" onclick="return confirm('Are you sure to delete schedule '+'{{$schedule['schedule_name']}}' + '?');">Delete</a>
-                                </td>
+                                @role('admin')
+                                    <td>
+                                        <a href="{{route('schedule.edit',$schedule['id'])}}" style="float: left;margin-right: 5px;" title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                        <form action="{{route('schedule.delete',$schedule['id'])}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button style="background: unset;border: unset;color: #f70707;" onclick="return confirm('Are you sure to delete schedule '+'{{$schedule['schedule_name']}}' + '?');" type="submit" title="Xóa"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                @endrole
                             </tr>
                             @endforeach
                         </tbody>
@@ -59,7 +66,9 @@
                                 <th>Plan</th>
                                 <th>Status</th>
                                 <th>End date</th>
-                                <th>Process</th>
+                                @role('admin')
+                                    <th>Process</th>
+                                @endrole
                             </tr>
                         </tfoot>
                     </table>
