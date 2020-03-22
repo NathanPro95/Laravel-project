@@ -20,22 +20,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($followWorks as $followWork)
+                        @foreach($detailFollowWorks as $detailFollowWork)
                             <tr>
                                 <td>
-                                    <p>{{$followWork['name']}}</p>
+                                    <p>{{$detailFollowWork['name']}}</p>
                                 </td>
                                 <td>
-                                    <p>{{$followWork['finish']}}</p>
+                                    <p></p>
                                 </td>
                                 <td>
-                                    <p>{{$followWork['note']}}</p>
+                                    <p></p>
                                 </td>
                                 <td>
-                                    <p>{{$followWork['expected_complete_date']}}</p>
+                                    <p></p>
                                 </td>
                                 <td>
-                                    <p>{{$followWork['end_date']}}</p>
+                                    <p></p>
                                 </td>
                                 <td>
                                     <p></p>
@@ -47,7 +47,7 @@
                                     <p></p>
                                 </td>
                                 <td>
-                                    <a href="{{route('construction.update', $followWork['parent_id'])}}}">Detail</a>
+                                    <a href="{{route('construction.update', $detailFollowWork['parent_id'])}}}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach
