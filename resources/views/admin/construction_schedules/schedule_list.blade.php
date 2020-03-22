@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($dataProgress as $value)
+                        @foreach($trackProgress as $value)
                             <tr>
                                 <td>
                                     {{$value['schedule_name']}}
@@ -38,13 +38,13 @@
                                     <p>{{$value['area']}}</p>
                                 </td>
                                 <td>
-                                    <p>{{$value['image']}}</p>
-                                </td>
-                                <td>
                                     <p>{{$value['created_at']}}</p>
                                 </td>
                                 <td>
-                                    <p>{{$value['updated_at']}}</p>
+
+                                </td>
+                                <td>
+                                    <p>{{$value['image']}}</p>
                                 </td>
                                 <td>
                                     <a href="{{route('construction.detail',$value['id'])}}">Detail</a>
