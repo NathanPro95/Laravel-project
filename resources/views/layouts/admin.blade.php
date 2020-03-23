@@ -238,7 +238,7 @@
               </li>
             </ul>
           </li>
-          
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
@@ -253,7 +253,7 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Quản lý loại công trình</p>
                 </a>
-                
+
               </li>
               <li class="nav-item">
                 <a href="{{route('schedule.create')}}" class="nav-link">
@@ -288,7 +288,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('schedule.list')}}" class="nav-link">
+                <a href="{{route('construction.list')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách tiến độ công việc</p>
                 </a>

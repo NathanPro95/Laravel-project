@@ -47,7 +47,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="{{route('construction.detailwork', $detailTrackProgress[0]['work_id']['construction'])}}" class="small-box-footer text-update">Cập nhật tiến độ <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{route('construction.detailwork', $detailTrackProgress[0]['id'])}}" class="small-box-footer text-update">Cập nhật tiến độ <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6">
@@ -76,14 +76,16 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <form method="post" action="{{(route('construction.post.update'))}}" role="form">
+                <form method="post" action="{{(route('construction.post.update'))}}" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <input type="hidden" name="name" value="Biên Bản Bàn Giao">
-                        <div class="form-group">
-                            <label for="scheduleName">Biên Bản Bàn Giao</label>
-                            <input type="file" name="protocol" class="form-control" placeholder="Enter schedule name">
-                        </div>
+                        <input type="hidden" name="handover_ground" value="Bàn Giao Mặt Bằng">
+                        @if($detailTrackProgress[0]['handover_gorund'] == 100)
+                            <div class="form-group">
+                                <label for="scheduleName">Biên Bản Bàn Giao</label>
+                                <input type="file" name="protocol" class="form-control" placeholder="Enter schedule name">
+                            </div>
+                        @else
                         <div class="form-group">
                             <label for="scheduleName">Khu Vực</label>
                             <input type="text" name="area" class="form-control" placeholder="Khu Vực">
@@ -104,8 +106,8 @@
                             <label for="endDate">Ngày Kết Thúc</label>
                             <input type="date" name="end_date" class="form-control" placeholder="Enter schedule status">
                         </div>
-                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['schedules_id']}}">
-                        <input type="hidden" name="parent_id" value="1">
+                        @endif
+                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['id']}}">
                     </div>
                     <!-- /.card-body -->
 
@@ -115,14 +117,16 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <form method="post" action="{{(route('construction.post.update'))}}" role="form">
+                <form method="post" action="{{(route('construction.post.update'))}}" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <input type="hidden" name="name" value="Biên Bản Vật Tư">
-                        <div class="form-group">
-                            <label for="scheduleName">Biên Bản Bàn Giao</label>
-                            <input type="file" name="protocol" class="form-control" placeholder="Enter schedule name">
-                        </div>
+                        <input type="hidden" name="handover_of_subpplies" value="Biên Bản Vật Tư">
+                        @if($detailTrackProgress[0]['handover_of_subpplies'] == 100)
+                            <div class="form-group">
+                                <label for="scheduleName">Biên Bản Bàn Giao</label>
+                                <input type="file" name="protocol" class="form-control" placeholder="Enter schedule name">
+                            </div>
+                        @else
                         <div class="form-group">
                             <label for="scheduleName">Khu Vực</label>
                             <input type="text" name="area" class="form-control" placeholder="Khu Vực">
@@ -143,8 +147,8 @@
                             <label for="endDate">Ngày Kết Thúc</label>
                             <input type="date" name="end_date" class="form-control" placeholder="Enter schedule status">
                         </div>
-                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['schedules_id']}}">
-                        <input type="hidden" name="parent_id" value="2">
+                        @endif
+                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['id']}}">
                     </div>
                     <!-- /.card-body -->
 
@@ -182,7 +186,6 @@
                             <input type="date" name="end_date" class="form-control" placeholder="Enter schedule status">
                         </div>
                         <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['id']}}">
-                        <input type="hidden" name="parent_id" value="3">
                     </div>
                     <!-- /.card-body -->
 

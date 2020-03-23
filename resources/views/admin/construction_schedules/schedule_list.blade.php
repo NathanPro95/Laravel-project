@@ -13,14 +13,15 @@
                                 <th>Bàn Giao Vật Tư</th>
                                 <th>Thi Công</th>
                                 <th>Khu Vực</th>
-                                <th>Hình Ảnh</th>
+                                <th>Biên Bản Mặt Bằng</th>
+                                <th>Biên Bản Vật Tư</th>
                                 <th>Ngày Tạo</th>
                                 <th>Ngày Cập Nhật</th>
                                 <th>Chức Năng</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        @foreach($dataProgress as $value)
+                        <tbody class="track-progress">
+                        @foreach($projectStart as $value)
                             <tr>
                                 <td>
                                     {{$value['schedule_name']}}
@@ -38,7 +39,14 @@
                                     <p>{{$value['area']}}</p>
                                 </td>
                                 <td>
-                                    <p>{{$value['image']}}</p>
+                                    @if(!empty($value['image_handover_ground']))
+                                    <p><img src="{{asset('images')}}/{{$value['image_handover_ground']}}" alt=""></p>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(!empty($value['image_handover_supplies']))
+                                    <p><img src="{{asset('images')}}/{{$value['image_handover_supplies']}}" alt=""></p>
+                                    @endif
                                 </td>
                                 <td>
                                     <p>{{$value['created_at']}}</p>
@@ -59,7 +67,8 @@
                                 <th>Bàn Giao Vật Tư</th>
                                 <th>Thi Công</th>
                                 <th>Khu Vực</th>
-                                <th>Hình Ảnh</th>
+                                <th>Biên Bản Mặt Bằng</th>
+                                <th>Biên Bản Vật Tư</th>
                                 <th>Ngày Tạo</th>
                                 <th>Ngày Cập Nhật</th>
                                 <th>Chức Năng</th>
@@ -71,3 +80,10 @@
         </div>
     </div>
 @endsection
+<style>
+    img{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+</style>
