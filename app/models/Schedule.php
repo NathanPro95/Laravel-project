@@ -4,7 +4,7 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class schedule extends Model
+class Schedule extends Model
 {
     //
     protected $table = 'schedules';
@@ -20,10 +20,5 @@ class schedule extends Model
         'created_at',
         'updated_at'
     ];
-
-    // public function getAll(){
-    //     $data = $table::schedules->get();
-    //     dd($data);
-    // }
 
 }

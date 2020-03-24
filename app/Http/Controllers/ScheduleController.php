@@ -10,6 +10,7 @@ class ScheduleController extends Controller
 {
     function __construct(schedule $schedule, TrackProgress $trackProgress)
     {
+        $this->middleware('auth');
         $this->model = $schedule;
         $this->trackprogress = $trackProgress;
     }
@@ -25,8 +26,15 @@ class ScheduleController extends Controller
     }
     public function delete(Request $request)
     {
-        $this->model->delete($request->id);
-        # code...
+        $user = $request->user();
+        dd($user->hasRole('admin'));
+        $schedule = Schedule::findOrFail($request->id);
+        $result = $schedule->delete();
+        if($result){
+            return redirect('/manageSchedule/schedule')->with('success','Schedule deleted successfully');
+        }else{
+            return redirect('/manageSchedule/schedule')->with('failed','Schedule deleted failed');
+        }
     }
     /**
      * Show the form for creating a new resource.
@@ -36,13 +44,6 @@ class ScheduleController extends Controller
     public function create()
     {
         return view('admin/schedules/create');
-        // $scheduleDB = $this->model;
-        // $scheduleDB->schedule_name = $request->schedule_name;
-        // $scheduleDB->schedule_status = $request->schedule_status;
-        // if($scheduleDB->save()){
-        //     return redirect('quanly/schedule');
-        // }
-        # code...
     }
     /**
      * Store a newly created resource in storage.
@@ -56,7 +57,7 @@ class ScheduleController extends Controller
             'schedule_name'=>'required',
             'schedule_status'=>'required'
         ]);
-        $schedule = new schedule([
+        $schedule = new Schedule([
             'schedule_name'=> $request->get('schedule_name'),
             'contract_date'=> $request->get('contract_date'),
             'valuable'=> $request->get('valuable'),

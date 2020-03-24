@@ -20,23 +20,27 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['namespace', 'prefix' => 'manageSchedule'], function() {
+
     Route::group(['prefix' => 'schedule'], function() {
+        Route::group(['middleware' => 'role:admin'],function (){
+            Route::delete('delete/{id}',['as' => 'schedule.delete', 'uses' => 'ScheduleController@delete']);
+            Route::get('edit/{id}',['as' => 'schedule.edit', 'uses' => 'ScheduleController@edit']);
+            Route::post('update/{id}',['as' => 'schedule.update', 'uses' => 'ScheduleController@update']);
+        });
         Route::get('/',['as' => 'schedule.list', 'uses' => 'ScheduleController@index']);
-        Route::post('delete/{id}',['as' => 'schedule.delete', 'uses' => 'ScheduleController@delete']);
-        Route::get('edit/{id}',['as' => 'schedule.edit', 'uses' => 'ScheduleController@edit']);
         Route::get('create',['as' => 'schedule.create', 'uses' => 'ScheduleController@create']);
         Route::post('store',['as' => 'schedule.store', 'uses' => 'ScheduleController@store']);
-        Route::post('update/{id}',['as' => 'schedule.update', 'uses' => 'ScheduleController@update']);
-
         Route::post('import',['as' => 'schedule.import', 'uses' => 'ImportExcelController@import']);
     });
     Route::group(['prefix' => 'user'], function() {
+        Route::group(['middleware' => 'role:admin'],function (){
+            Route::delete('delete/{id}',['as' => 'user.delete', 'uses' => 'UserController@delete']);
+            Route::get('edit/{id}',['as' => 'user.edit', 'uses' => 'UserController@edit']);
+            Route::get('create',['as' => 'user.create', 'uses' => 'UserController@create']);
+            Route::post('store',['as' => 'user.store', 'uses' => 'UserController@store']);
+            Route::post('update/{id}',['as' => 'user.update', 'uses' => 'UserController@update']);
+        });
         Route::get('/',['as' => 'user.list', 'uses' => 'UserController@index']);
-        Route::post('delete/{id}',['as' => 'user.delete', 'uses' => 'UserController@delete']);
-        Route::get('edit/{id}',['as' => 'user.edit', 'uses' => 'UserController@edit']);
-        Route::get('create',['as' => 'user.create', 'uses' => 'UserController@create']);
-        Route::post('store',['as' => 'user.store', 'uses' => 'UserController@store']);
-        Route::post('update/{id}',['as' => 'user.update', 'uses' => 'UserController@update']);
     });
     Route::group(['prefix' => 'construction'], function() {
         Route::get('/',['as' => 'construction.list', 'uses' => 'ConstructionController@index']);

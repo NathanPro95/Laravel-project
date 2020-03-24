@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     function __construct(user $user)
     {
+        $this->middleware('auth');
         $this->model = $user;
     }
     /**
@@ -23,8 +26,13 @@ class UserController extends Controller
     }
     public function delete(Request $request)
     {
-        $this->model->delete($request->id);
-        # code...
+        $user = User::findOrFail($request->id);
+        $result = $user->delete();
+        if($result){
+            return redirect('/manageSchedule/user')->with('success','User deleted successfully');
+        }else{
+            return redirect('/manageSchedule/user')->with('failed','User deleted failed');
+        }
     }
     /**
      * Show the form for creating a new resource.
@@ -33,7 +41,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin/users/create');
+        $lstRole = Role::all();
+        return view('admin/users/create',compact('lstRole'));
     }
     /**
      * Store a newly created resource in storage.
@@ -44,20 +53,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'schedule_name'=>'required',
-            'schedule_status'=>'required'
+            'name'=>'required',
+            'email'=>'required',
+            'password'=>'required',
+            'role_id'=>'required'
         ]);
-        $schedule = new schedule([
-            'schedule_name'=> $request->get('schedule_name'),
-            'contract_date'=> $request->get('contract_date'),
-            'valuable'=> $request->get('valuable'),
-            'number_member'=> $request->get('number_member'),
-            'construction_plan'=> $request->get('construction_plan'),
-            'end_date'=> $request->get('end_date'),
-            'schedule_status'=> $request->get('schedule_status'),
+        $user = new User([
+            'name'=> $request->get('name'),
+            'email'=> $request->get('email'),
+            'password'=> Hash::make($request->get('password')),
+            'role_id'=> $request->get('role_id'),
         ]);
-        $schedule->save();
-        return redirect('/manageSchedule/schedule')->with('success','Schedule saved successfully');
+        $user->save();
+        return redirect('/manageSchedule/user')->with('success','User saved successfully');
     }
     /**
      * Show the form for editing the specified resource.
@@ -69,7 +77,8 @@ class UserController extends Controller
     {
         //
         $user = $this->model->find($id);
-        return view('admin/users/create', compact('user'));
+        $lstRole = Role::all();
+        return view('admin/users/create', compact(['user','lstRole']));
     }
     /**
      * Update the specified resource in storage.
@@ -80,16 +89,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $schedule = $this->model->find($id);
-        $schedule->schedule_name = $request->get('schedule_name');
-        $schedule->contract_date = $request->get('contract_date');
-        $schedule->valuable = $request->get('valuable');
-        $schedule->number_member = $request->get('number_member');
-        $schedule->construction_plan = $request->get('construction_plan');
-        $schedule->end_date = $request->get('end_date');
-        $schedule->schedule_status = $request->get('schedule_status');
-        $schedule->update();
-        return redirect('/manageSchedule/schedule')->with('success','Schedule saved successfully');
+        $user = $this->model->find($id);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->role_id = $request->get('role_id');
+        $user->update();
+        return redirect('/manageSchedule/user')->with('success','User saved successfully');
 
     }
 }

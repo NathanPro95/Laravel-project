@@ -18,10 +18,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($followWorks as $followWork)
+                        @foreach($detailFollowWorks as $detailFollowWork)
                             <tr>
                                 <td>
-                                    <p>{{$followWork['name']}}</p>
+                                    <p>{{$detailFollowWork['name']}}</p>
                                 </td>
                                 <td>
                                     <p>{{$followWork['area']}}</p>
@@ -30,16 +30,26 @@
                                     <p>{{$followWork['finish']}}</p>
                                 </td>
                                 <td>
-                                    <p>{{$followWork['note']}}</p>
+                                    <p></p>
                                 </td>
                                 <td>
-                                    <p>{{$followWork['expected_complete_date']}}</p>
+                                    <p></p>
                                 </td>
                                 <td>
-                                    <p>{{$followWork['end_date']}}</p>
+                                    <p></p>
                                 </td>
                                 <td>
                                     <a href="#" data-toggle="modal" class="update-construction" onclick="getIdFollowWork({{$followWork['id']}})" data-target="#exampleModal" data-whatever="@mdo">Cập Nhật</a>
+                                    <p></p>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <a href="{{route('construction.update', $detailFollowWork['parent_id'])}}}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach

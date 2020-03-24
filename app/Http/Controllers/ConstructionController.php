@@ -7,16 +7,14 @@ use Illuminate\Http\Request;
 use App\models\TrackProgress;
 use App\models\FollowWork;
 use League\Flysystem\Config;
-use App\models\schedule;
 
 class ConstructionController extends Controller
 {
     //
-    function __construct(TrackProgress $trackProgress, FollowWork $followWork, schedule $schedule)
+    function __construct(TrackProgress $trackProgress, FollowWork $followWork)
     {
         $this->model = $trackProgress;
         $this->followWork = $followWork;
-        $this->schedule = $schedule;
     }
 
     public function index()
@@ -35,10 +33,11 @@ class ConstructionController extends Controller
     }
     public function detail($id)
     {
-        $detailTrackProgress = $this->model->where('schedules_id',$id)->get()->toArray();
-        $sum = (1/3)*($detailTrackProgress[0]['handover_gorund']+$detailTrackProgress[0]['handover_of_subpplies']+$detailTrackProgress[0]['construction']);
-        $detailTrackProgress[0]['sum'] = $sum;
-        $detailTrackProgress[0]['work_id'] = ['gorund' => 1, 'subpplies' => 2, 'construction' => 3];
+        $detailTrackProgress = $this->model->find($id);
+        $detailTrackProgress = $detailTrackProgress->toArray();
+        $sum = (1/3)*($detailTrackProgress['handover_gorund']+$detailTrackProgress['handover_of_subpplies']+$detailTrackProgress['construction']);
+        $detailTrackProgress['sum'] = $sum;
+        $detailTrackProgress['work_id'] = ['gorund' => 1, 'subpplies' => 2, 'construction' => 3];
         return view('admin.construction_schedules.detail', compact('detailTrackProgress'));
     }
     public function detailWork($id)
