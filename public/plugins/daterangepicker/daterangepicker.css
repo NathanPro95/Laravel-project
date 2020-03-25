@@ -418,3 +418,7 @@
 .height-track{
     height: 160px;
 }
+.track-progress image{
+    width: 100px;
+    height: 100px;
+}

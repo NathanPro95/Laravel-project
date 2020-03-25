@@ -46,7 +46,9 @@ Route::group(['namespace', 'prefix' => 'manageSchedule'], function() {
         Route::get('/',['as' => 'construction.list', 'uses' => 'ConstructionController@index']);
         Route::get('detail/{id}',['as' => 'construction.detail', 'uses' => 'ConstructionController@detail']);
         Route::get('detail-work/{id}',['as' => 'construction.detailwork', 'uses' => 'ConstructionController@detailWork']);
-        Route::get('update/{id}',['as' => 'construction.update', 'uses' => 'ConstructionController@getUpdate']);
         Route::post('update',['as' => 'construction.post.update', 'uses' => 'ConstructionController@postUpdate']);
+        Route::post('update-contruction',['as' => 'construction.post.updateConstruction', 'uses' => 'ConstructionController@postUpdateConstruction']);
+        Route::get('create',['as' => 'user.create', 'uses' => 'UserController@create']);
+        Route::post('store',['as' => 'user.store', 'uses' => 'UserController@store']);
     });
 });

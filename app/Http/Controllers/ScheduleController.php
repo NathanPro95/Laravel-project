@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\Schedule;
+use App\models\schedule;
+use App\models\TrackProgress;
 
 class ScheduleController extends Controller
 {
-    function __construct(Schedule $schedule)
+    function __construct(schedule $schedule, TrackProgress $trackProgress)
     {
         $this->middleware('auth');
         $this->model = $schedule;
+        $this->trackprogress = $trackProgress;
     }
     /**
      * Display a listing of the resource.
@@ -64,7 +66,20 @@ class ScheduleController extends Controller
             'end_date'=> $request->get('end_date'),
             'schedule_status'=> $request->get('schedule_status'),
         ]);
-        $schedule->save();
+        if ($schedule->save()){
+            $trackProgress = $this->trackprogress;
+            $dataProgress = $trackProgress->rightJoin('schedules', 'track_progress.schedules_id', '=', 'schedules.id')->get(['schedules.id', 'schedules.schedule_name', 'track_progress.handover_gorund', 'track_progress.handover_of_subpplies', 'track_progress.construction', 'track_progress.area',  'track_progress.image_handover_ground', 'track_progress.image_handover_supplies', 'track_progress.created_at', 'track_progress.updated_at','track_progress.schedules_id'])->toArray();
+            foreach ($dataProgress as $key => $valueProgress){
+                if ($valueProgress['schedules_id'] != $valueProgress['id']){
+                    $trackProgress = new $this->trackprogress;
+                    $trackProgress['handover_gorund'] = Config('const.DEFAUTLTRACKPROGRESS');
+                    $trackProgress['handover_of_subpplies'] = Config('const.DEFAUTLTRACKPROGRESS');
+                    $trackProgress['construction'] = Config('const.DEFAUTLTRACKPROGRESS');
+                    $trackProgress['schedules_id'] = $valueProgress['id'];
+                    $trackProgress->save();
+                }
+            }
+        }
         return redirect('/manageSchedule/schedule')->with('success','Schedule saved successfully');
     }
     /**

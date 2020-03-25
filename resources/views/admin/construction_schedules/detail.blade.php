@@ -47,7 +47,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="{{route('construction.detailwork', $detailTrackProgress['work_id']['construction'])}}" class="small-box-footer text-update">Cập nhật tiến độ <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{route('construction.detailwork', $detailTrackProgress[0]['id'])}}" class="small-box-footer text-update">Cập nhật tiến độ <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6">
@@ -63,6 +63,136 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Bàn Giao Mặt Bằng</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Bàn Giao Vật Tư</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Thi Công</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <form method="post" action="{{(route('construction.post.update'))}}" role="form" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        <input type="hidden" name="handover_ground" value="Bàn Giao Mặt Bằng">
+                        @if($detailTrackProgress[0]['handover_gorund'] == 100)
+                            <div class="form-group">
+                                <label for="scheduleName">Biên Bản Bàn Giao</label>
+                                <input type="file" name="protocol" class="form-control" placeholder="Enter schedule name">
+                            </div>
+                        @else
+                        <div class="form-group">
+                            <label for="scheduleName">Khu Vực</label>
+                            <input type="text" name="area" class="form-control" placeholder="Khu Vực">
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduleName">Tiến Độ</label>
+                            <input type="number" name="finish" class="form-control" placeholder="Tiến Độ">
+                        </div>
+                        <div class="form-group">
+                            <label for="contractDate">Ngày Dự Kiến Hoàn Thành</label>
+                            <input type="date" name="expected_complete_date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="valuable">Ghi Chú</label>
+                            <textarea style="width: 100%" name="note"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">Ngày Kết Thúc</label>
+                            <input type="date" name="end_date" class="form-control" placeholder="Enter schedule status">
+                        </div>
+                        @endif
+                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['id']}}">
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <form method="post" action="{{(route('construction.post.update'))}}" role="form" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        <input type="hidden" name="handover_of_subpplies" value="Biên Bản Vật Tư">
+                        @if($detailTrackProgress[0]['handover_of_subpplies'] == 100)
+                            <div class="form-group">
+                                <label for="scheduleName">Biên Bản Bàn Giao</label>
+                                <input type="file" name="protocol" class="form-control" placeholder="Enter schedule name">
+                            </div>
+                        @else
+                        <div class="form-group">
+                            <label for="scheduleName">Khu Vực</label>
+                            <input type="text" name="area" class="form-control" placeholder="Khu Vực">
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduleName">Tiến Độ</label>
+                            <input type="number" name="finish" class="form-control" placeholder="Tiến Độ">
+                        </div>
+                        <div class="form-group">
+                            <label for="contractDate">Ngày Dự Kiến Hoàn Thành</label>
+                            <input type="date" name="expected_complete_date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="valuable">Ghi Chú</label>
+                            <textarea style="width: 100%" name="note"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">Ngày Kết Thúc</label>
+                            <input type="date" name="end_date" class="form-control" placeholder="Enter schedule status">
+                        </div>
+                        @endif
+                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['id']}}">
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <form method="post" action="{{(route('construction.post.update'))}}" role="form">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="scheduleName">Hạng Mục</label>
+                            <input type="text" name="name" class="form-control" placeholder="Hạng Mục">
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduleName">Khu Vực</label>
+                            <input type="text" name="area" class="form-control" placeholder="Khu Vực">
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduleName">Tiến Độ</label>
+                            <input type="number" name="finish" class="form-control" placeholder="Tiến Độ">
+                        </div>
+                        <div class="form-group">
+                            <label for="contractDate">Ngày Dự Kiến Hoàn Thành</label>
+                            <input type="date" name="expected_complete_date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="valuable">Ghi Chú</label>
+                            <textarea style="width: 100%" name="note"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">Ngày Kết Thúc</label>
+                            <input type="date" name="end_date" class="form-control" placeholder="Enter schedule status">
+                        </div>
+                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['id']}}">
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
