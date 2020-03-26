@@ -18,10 +18,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($detailFollowWorks as $detailFollowWork)
+                        @foreach($followWorks as $followWork)
                             <tr>
                                 <td>
-                                    <p>{{$detailFollowWork['name']}}</p>
+                                    <p>{{$followWork['name']}}</p>
                                 </td>
                                 <td>
                                     <p>{{$followWork['area']}}</p>
@@ -30,26 +30,16 @@
                                     <p>{{$followWork['finish']}}</p>
                                 </td>
                                 <td>
-                                    <p></p>
+                                    <p>{{$followWork['note']}}</p>
                                 </td>
                                 <td>
-                                    <p></p>
+                                    <p>{{date('d-m-Y', strtotime($followWork['expected_complete_date']))}}</p>
                                 </td>
                                 <td>
-                                    <p></p>
+                                    <p>{{date('d-m-Y', strtotime($followWork['end_date']))}}</p>
                                 </td>
                                 <td>
                                     <a href="#" data-toggle="modal" class="update-construction" onclick="getIdFollowWork({{$followWork['id']}})" data-target="#exampleModal" data-whatever="@mdo">Cập Nhật</a>
-                                    <p></p>
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <p></p>
-                                </td>
-                                <td>
-                                    <a href="{{route('construction.update', $detailFollowWork['parent_id'])}}}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -47,13 +47,12 @@
                                     @if(!empty($value['image_handover_supplies']))
                                     <p><img src="{{asset('images')}}/{{$value['image_handover_supplies']}}" alt=""></p>
                                     @endif
+                                </td>
+                                <td>
                                     <p>{{$value['created_at']}}</p>
                                 </td>
                                 <td>
-
-                                </td>
-                                <td>
-                                    <p>{{$value['image']}}</p>
+                                    <p>{{$value['updated_at']}}</p>
                                 </td>
                                 <td>
                                     <a href="{{route('construction.detail',$value['id'])}}">Detail</a>
