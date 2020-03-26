@@ -22,7 +22,7 @@ class ConstructionController extends Controller
         $projectStart = [];
         $dem = Config('const.INITIALIZATION_0');
         $trackProgress = $this->model;
-        $dataProgress = $trackProgress->rightJoin('schedules', 'track_progress.schedules_id', '=', 'schedules.id')->get(['schedules.id', 'schedules.schedule_name', 'schedules.contract_date', 'track_progress.handover_gorund', 'track_progress.handover_of_subpplies', 'track_progress.construction', 'track_progress.area', 'track_progress.image_handover_ground', 'track_progress.image_handover_supplies', 'track_progress.created_at', 'track_progress.updated_at','track_progress.schedules_id'])->toArray();
+        $dataProgress = $trackProgress->rightJoin('schedules', 'track_progress.schedules_id', '=', 'schedules.id')->get(['schedules.schedule_name', 'schedules.contract_date', 'track_progress.id', 'track_progress.handover_gorund', 'track_progress.handover_of_subpplies', 'track_progress.construction', 'track_progress.area', 'track_progress.image_handover_ground', 'track_progress.image_handover_supplies', 'track_progress.created_at', 'track_progress.updated_at','track_progress.schedules_id'])->toArray();
         for($i = Config('const.INITIALIZATION_0'); $i < count($dataProgress); $i++){
             if (date('d-m-Y',strtotime(Carbon::now())) >= date('d-m-Y',strtotime($dataProgress[$i]['contract_date']))){
                 $projectStart[$dem] = $dataProgress[$i];

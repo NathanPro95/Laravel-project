@@ -47,7 +47,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="{{route('construction.detailwork', $detailTrackProgress[0]['id'])}}" class="small-box-footer text-update">Cập nhật tiến độ <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{route('construction.detailwork', $detailTrackProgress['id'])}}" class="small-box-footer text-update">Cập nhật tiến độ <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-6">
@@ -80,7 +80,7 @@
                     @csrf
                     <div class="card-body">
                         <input type="hidden" name="handover_ground" value="Bàn Giao Mặt Bằng">
-                        @if($detailTrackProgress[0]['handover_gorund'] == 100)
+                        @if($detailTrackProgress['handover_gorund'] == 100)
                             <div class="form-group">
                                 <label for="scheduleName">Biên Bản Bàn Giao</label>
                                 <input type="file" name="protocol" class="form-control" placeholder="Enter schedule name">
@@ -107,7 +107,7 @@
                             <input type="date" name="end_date" class="form-control" placeholder="Enter schedule status">
                         </div>
                         @endif
-                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['id']}}">
+                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress['id']}}">
                     </div>
                     <!-- /.card-body -->
 
@@ -121,7 +121,7 @@
                     @csrf
                     <div class="card-body">
                         <input type="hidden" name="handover_of_subpplies" value="Biên Bản Vật Tư">
-                        @if($detailTrackProgress[0]['handover_of_subpplies'] == 100)
+                        @if($detailTrackProgress['handover_of_subpplies'] == 100)
                             <div class="form-group">
                                 <label for="scheduleName">Biên Bản Bàn Giao</label>
                                 <input type="file" name="protocol" class="form-control" placeholder="Enter schedule name">
@@ -148,7 +148,7 @@
                             <input type="date" name="end_date" class="form-control" placeholder="Enter schedule status">
                         </div>
                         @endif
-                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['id']}}">
+                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress['id']}}">
                     </div>
                     <!-- /.card-body -->
 
@@ -185,7 +185,7 @@
                             <label for="endDate">Ngày Kết Thúc</label>
                             <input type="date" name="end_date" class="form-control" placeholder="Enter schedule status">
                         </div>
-                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress[0]['id']}}">
+                        <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress['id']}}">
                     </div>
                     <!-- /.card-body -->
 
