@@ -72,9 +72,6 @@ class ScheduleController extends Controller
             foreach ($dataProgress as $key => $valueProgress){
                 if ($valueProgress['schedules_id'] != $valueProgress['id']){
                     $trackProgress = new $this->trackprogress;
-                    $trackProgress['handover_gorund'] = Config('const.DEFAUTLTRACKPROGRESS');
-                    $trackProgress['handover_of_subpplies'] = Config('const.DEFAUTLTRACKPROGRESS');
-                    $trackProgress['construction'] = Config('const.DEFAUTLTRACKPROGRESS');
                     $trackProgress['schedules_id'] = $valueProgress['id'];
                     $trackProgress->save();
                 }
