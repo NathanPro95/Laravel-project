@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['namespace', 'prefix' => 'manageSchedule'], function() {
+Route::group(['namespace', 'prefix' => 'manageSchedule', 'middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'schedule'], function() {
         Route::group(['middleware' => 'role:admin'],function (){
