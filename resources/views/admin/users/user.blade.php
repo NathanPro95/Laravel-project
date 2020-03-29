@@ -4,18 +4,30 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="card-title">
+                                Danh sách người dùng
+                            </h3>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{route('user.create')}}" class="btn btn-primary float-right">Tạo người dùng</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <table id="schedule_table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>UserName</th>
+                                <th>Tên người dùng</th>
                                 <th>Email</th>
-                                <th>Role</th>
-                                <th>Created date</th>
-                                <th>Updated date</th>
+                                <th>Quyền</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày cập nhật</th>
                                 @role('admin')
-                                    <th>Process</th>
+                                    <th>Thao tác</th>
                                 @endrole
                             </tr>
                         </thead>
@@ -46,13 +58,13 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
-                                <th>UserName</th>
+                                <th>Tên người dùng</th>
                                 <th>Email</th>
-                                <th>Role</th>
-                                <th>Created date</th>
-                                <th>Updated date</th>
+                                <th>Quyền</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày cập nhật</th>
                                 @role('admin')
-                                    <th>Process</th>
+                                    <th>Thao tác</th>
                                 @endrole
                             </tr>
                         </tfoot>

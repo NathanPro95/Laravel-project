@@ -2,10 +2,25 @@
 
 @section('content')
 <div class="row">
-        <div class="col-md-12">
-            <div class="card">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="card-title">
+                            <?php
+                            if(empty($user['id'])){
+                                echo "Tạo mới người dùng";
+                            }else{
+                                echo "Cập nhật người dùng";
+                            }
+                            ?>
+                        </h3>
+                    </div>
+                </div>
+            </div>
             <form method="post" action="{{empty($user['id']) ? route('user.store') : route('user.update',$user['id'])}}" role="form">
-            @csrf
+                @csrf
                 <div class="card-body">
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -42,11 +57,16 @@
                             @endforeach
                         </select>
                     </div>
+                        <div class="form-group">
+                            <label for="email">Ảnh đại diện</label>
+                            <input type="file" name="avatar" value="{{!empty($user['avatar']) ? $user['avatar'] : "" }}" class="form-control" >
+                        </div>
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary"><?php if(empty($user['id'])) echo"Tạo mới"; else echo "Cập nhật"; ?></button>
+                    <a href="{{route('user.list')}}" class="btn btn-default">Hủy</a>
                 </div>
             </form>
         </div>

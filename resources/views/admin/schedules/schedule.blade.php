@@ -3,6 +3,18 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="card-title">
+                                Danh sách công trình
+                            </h3>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{route('schedule.create')}}" class="btn btn-primary float-right">Tạo công trình</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('schedule.import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -14,7 +26,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <button class="btn btn-success">Import Schedule</button>
+                                    <button class="btn btn-success">Tải lên</button>
                                 </div>
                             </div>
                         </div>
@@ -22,15 +34,15 @@
                     <table id="schedule_table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Contract date</th>
-                                <th>Valuable</th>
-                                <th>Number emp</th>
-                                <th>Plan</th>
-                                <th>Status</th>
-                                <th>End date</th>
+                                <th>Tên công trình</th>
+                                <th>Ngày hợp đồng</th>
+                                <th>Giá trị HĐ(VNĐ)</th>
+                                <th>Số công nhân</th>
+                                <th>Kế hoạch</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày hoàn thành</th>
                                 @role('admin')
-                                    <th>Process</th>
+                                    <th>Thao tác</th>
                                 @endrole
                             </tr>
                         </thead>
@@ -50,7 +62,7 @@
                                         <form action="{{route('schedule.delete',$schedule['id'])}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button style="background: unset;border: unset;color: #f70707;" onclick="return confirm('Are you sure to delete schedule '+'{{$schedule['schedule_name']}}' + '?');" type="submit" title="Xóa"><i class="fa fa-trash"></i></button>
+                                            <button style="background: unset;border: unset;color: #f70707;" onclick="return confirm('Bạn có chắc chắn muốn xóa '+'{{$schedule['schedule_name']}}' + '?');" type="submit" title="Xóa"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </td>
                                 @endrole
@@ -59,15 +71,15 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>Contract date</th>
-                                <th>Valuable</th>
-                                <th>Number emp</th>
-                                <th>Plan</th>
-                                <th>Status</th>
-                                <th>End date</th>
+                                <th>Tên công trình</th>
+                                <th>Ngày hợp đồng</th>
+                                <th>Giá trị HĐ(VNĐ)</th>
+                                <th>Số công nhân</th>
+                                <th>Kế hoạch</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày hoàn thành</th>
                                 @role('admin')
-                                    <th>Process</th>
+                                <th>Thao tác</th>
                                 @endrole
                             </tr>
                         </tfoot>
