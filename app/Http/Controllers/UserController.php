@@ -56,12 +56,13 @@ class UserController extends Controller
             'name'=>'required',
             'email'=>'required',
             'password'=>'required',
-            'role_id'=>'required'
+            'role_id'=>'required',
+            'avatar'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $user = new User([
             'name'=> $request->get('name'),
             'email'=> $request->get('email'),
-            'avatar'=> $request->get('avatar'),
+            'avatar'=> $request->file('avatar') ? $request->file('avatar')->store('','avatars') : null,
             'password'=> Hash::make($request->get('password')),
             'role_id'=> $request->get('role_id'),
         ]);
@@ -93,7 +94,9 @@ class UserController extends Controller
         $user = $this->model->find($id);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->avatar = $request->get('avatar');
+        if($request->file('avatar')){
+            $user->avatar = $request->file('avatar')->store('','avatars');
+        }
         $user->role_id = $request->get('role_id');
         $user->update();
         return redirect('/manageSchedule/user')->with('success','User saved successfully');

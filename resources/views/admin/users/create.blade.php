@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <form method="post" action="{{empty($user['id']) ? route('user.store') : route('user.update',$user['id'])}}" role="form">
+            <form method="post" action="{{empty($user['id']) ? route('user.store') : route('user.update',$user['id'])}}" role="form" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     @if ($errors->any())

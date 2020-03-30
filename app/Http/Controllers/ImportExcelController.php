@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class ImportExcelController extends Controller
 {
     //
-	public function import() 
+	public function import()
 	{
 
 		Excel::import(new ScheduleImport,request()->file('file'));
@@ -19,9 +19,6 @@ class ImportExcelController extends Controller
 		foreach ($dataProgress as $key => $valueProgress){
 			if ((array)$valueProgress->schedules_id != (array)$valueProgress->id){
 				$trackProgress = new TrackProgress;
-				$trackProgress['handover_gorund'] = Config('const.DEFAUTLTRACKPROGRESS');
-				$trackProgress['handover_of_subpplies'] = Config('const.DEFAUTLTRACKPROGRESS');
-				$trackProgress['construction'] = Config('const.DEFAUTLTRACKPROGRESS');
 				$trackProgress['schedules_id'] = ((array)$valueProgress->id)[0];
 				$trackProgress->save();
 			}

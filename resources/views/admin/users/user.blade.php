@@ -24,6 +24,7 @@
                                 <th>Tên người dùng</th>
                                 <th>Email</th>
                                 <th>Quyền</th>
+                                <th>Ảnh đại diện</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 @role('admin')
@@ -38,6 +39,7 @@
                                 <td>{{$user['name']}}</td>
                                 <td>{{$user['email']}}</td>
                                 <td>{{$user['role_id'] == 1 ? "Admin" : "User"}}</td>
+                                <td>@if($user['avatar'] != null) <img src="{{asset('avatars/'.$user['avatar'])}}" width="50px" height="50px"> @endif</td>
                                 <td>{{$user['created_at'] != null ? date('d-m-Y',strtotime($user['created_at'])) : ""}}</td>
                                 <td>{{$user['updated_at'] != null ? date('d-m-Y',strtotime($user['updated_at'])) : ""}}</td>
                                 @role('admin')
@@ -61,6 +63,7 @@
                                 <th>Tên người dùng</th>
                                 <th>Email</th>
                                 <th>Quyền</th>
+                                <th>Ảnh đại diện</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 @role('admin')
