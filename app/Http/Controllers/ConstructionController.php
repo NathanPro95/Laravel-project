@@ -35,7 +35,7 @@ class ConstructionController extends Controller
     {
         $detailTrackProgress = $this->model->find($id);
         $detailTrackProgress = $detailTrackProgress->toArray();
-        $sum = (1/3)*($detailTrackProgress['handover_gorund']+$detailTrackProgress['handover_of_subpplies']+$detailTrackProgress['construction']);
+        $sum = (1/10)*$detailTrackProgress['handover_gorund'] + (1/10)*$detailTrackProgress['handover_of_subpplies'] + (8/10)*$detailTrackProgress['construction'];
         $detailTrackProgress['sum'] = $sum;
         $detailTrackProgress['work_id'] = ['gorund' => 1, 'subpplies' => 2, 'construction' => 3];
         return view('admin.construction_schedules.detail', compact('detailTrackProgress'));
@@ -83,7 +83,8 @@ class ConstructionController extends Controller
                 }
                 $trackProgress->save();
             }
-            return redirect('/manageSchedule/construction');
+            $recordTrackProgressId = $trackProgress->find($request->track_progress_id);
+            return response()->json($recordTrackProgressId);
         } else {
             $followWork = $this->followWork;
             $followWork['name'] = $request['name'];
