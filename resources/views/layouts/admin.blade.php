@@ -27,6 +27,7 @@
   <link href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <style>
     .custom-dropdown{
@@ -230,14 +231,14 @@
                   <p>Danh sách người dùng</p>
                 </a>
               </li>
-              @role('admin')
+{{--              @role('admin')--}}
               <li class="nav-item">
                 <a href="{{route('user.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tạo người dùng mới</p>
                 </a>
               </li>
-              @endrole
+{{--              @endrole--}}
             </ul>
           </li>
 

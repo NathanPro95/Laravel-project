@@ -86,7 +86,6 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         function getIdFollowWork(id) {
             $(".follow_work_id").val(id);
