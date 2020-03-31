@@ -73,16 +73,19 @@ class ConstructionController extends Controller
                     $trackProgress['handover_gorund'] = $request->finish;
                 } else {
                     $trackProgress['image_handover_ground'] = $fileNameToStore;
+                    $trackProgress->save();
+                    return redirect('manageSchedule/construction');
                 }
-                $trackProgress->save();
             } else if(isset($request->handover_of_subpplies)){
                 if (!isset($fileNameToStore)){
                     $trackProgress['handover_of_subpplies'] = $request->finish;
                 } else {
                     $trackProgress['image_handover_supplies'] = $fileNameToStore;
+                    $trackProgress->save();
+                    return redirect('manageSchedule/construction');
                 }
-                $trackProgress->save();
             }
+            $trackProgress->save();
             $recordTrackProgressId = $trackProgress->find($request->track_progress_id);
             return response()->json($recordTrackProgressId);
         } else {
