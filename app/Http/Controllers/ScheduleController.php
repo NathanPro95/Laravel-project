@@ -25,8 +25,6 @@ class ScheduleController extends Controller
     }
     public function delete(Request $request)
     {
-        $user = $request->user();
-        dd($user->hasRole('admin'));
         $schedule = Schedule::findOrFail($request->id);
         $result = $schedule->delete();
         if($result){

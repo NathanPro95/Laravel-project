@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Manage Schedules | Dashboard</title>
+    <title>Quản lý tiến độ | Trang quản trị</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -169,7 +169,7 @@
     <a href="{{route('home')}}" class="brand-link">
       <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Trang quản trị</span>
     </a>
 
     <!-- Sidebar -->
@@ -177,7 +177,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('avatars/'.Auth::user()->avatar)}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <!-- <a href="#" class="d-block">Alexander Pierce</a> -->
@@ -191,12 +191,12 @@
                   <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
-                      {{ __('Logout') }}
+                      {{ __('Đăng xuất') }}
                   </a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       @csrf
                   </form>
-                  <a class="dropdown-item" href="">Profile</a>
+                  <a class="dropdown-item" href="">Thông tin</a>
               </div>
             </li>
           </ul>
@@ -411,7 +411,25 @@
 <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
 <script>
     $(document).ready(function() {
-    $('#schedule_table').DataTable();
+    $('#schedule_table').DataTable({
+        language: {
+            "sProcessing":   "Đang xử lý...",
+            "sLengthMenu":   "Xem _MENU_ mục",
+            "sZeroRecords":  "Không tìm thấy dòng nào phù hợp",
+            "sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+            "sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
+            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+            "sInfoPostFix":  "",
+            "sSearch":       "Tìm kiếm:",
+            "sUrl":          "",
+            "oPaginate": {
+                "sFirst":    "Đầu",
+                "sPrevious": "Trước",
+                "sNext":     "Tiếp",
+                "sLast":     "Cuối"
+            }
+        }
+    });
 } );
 </script>
 </body>
