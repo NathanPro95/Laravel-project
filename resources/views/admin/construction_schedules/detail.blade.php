@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="card">
+    <div class="card-body">
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -87,24 +89,12 @@
                             </div>
                         @else
                         <div class="form-group">
-                            <label for="scheduleName">Khu Vực</label>
-                            <input type="text" name="area" class="area form-control" placeholder="Khu Vực">
-                        </div>
-                        <div class="form-group">
                             <label for="scheduleName">Tiến Độ</label>
                             <input type="number" name="finish" class="finish form-control" placeholder="Tiến Độ">
                         </div>
                         <div class="form-group">
-                            <label for="contractDate">Ngày Dự Kiến Hoàn Thành</label>
-                            <input type="date" name="expected_complete_date" class="expected_complete_date form-control">
-                        </div>
-                        <div class="form-group">
                             <label for="valuable">Ghi Chú</label>
                             <textarea style="width: 100%" name="note" class="note"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="endDate">Ngày Kết Thúc</label>
-                            <input type="date" name="end_date" class="end_date form-control" placeholder="Enter schedule status">
                         </div>
                         @endif
                         <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress['id']}}">
@@ -112,7 +102,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </div>
                 </form>
             </div>
@@ -128,24 +118,12 @@
                             </div>
                         @else
                         <div class="form-group">
-                            <label for="scheduleName">Khu Vực</label>
-                            <input type="text" name="area" class="areaSubpplies form-control" placeholder="Khu Vực">
-                        </div>
-                        <div class="form-group">
                             <label for="scheduleName">Tiến Độ</label>
                             <input type="number" name="finish" class="finishSubpplies form-control" placeholder="Tiến Độ">
                         </div>
                         <div class="form-group">
-                            <label for="contractDate">Ngày Dự Kiến Hoàn Thành</label>
-                            <input type="date" name="expected_complete_date" class="expected_complete_date_subpplies form-control">
-                        </div>
-                        <div class="form-group">
                             <label for="valuable">Ghi Chú</label>
                             <textarea style="width: 100%" name="note" class="noteSubpplies"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="endDate">Ngày Kết Thúc</label>
-                            <input type="date" name="end_date" class="end_dateSubpplies form-control" placeholder="Enter schedule status">
                         </div>
                         @endif
                         <input type="hidden" name="track_progress_id" class="track_progress_id" value="{{$detailTrackProgress['id']}}">
@@ -153,7 +131,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </div>
                 </form>
             </div>
@@ -190,16 +168,18 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    </div>
+</div>
     <script>
         function updateSchedule(id){
-            $('.nav-item').removeClass('active');
-            $('.activeForm-'+id).addClass('active');
+            $('#nav-tab .nav-item').removeClass('active');
+            $('.activeForm-'+id).trigger('click');
         }
         jQuery(document).ready(function($) {
             $('#updateHandoverOfSubpplies').on('submit',function(event){
