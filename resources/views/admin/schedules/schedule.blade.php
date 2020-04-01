@@ -42,7 +42,7 @@
                                 <th>Trạng thái</th>
                                 <th>Ngày hoàn thành</th>
                                 @role('admin')
-                                <th>Thao tác</th>
+                                    <th>Thao tác</th>
                                 @endrole
                             </tr>
                         </thead>
