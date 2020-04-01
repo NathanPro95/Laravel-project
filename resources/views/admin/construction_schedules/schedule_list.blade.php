@@ -4,11 +4,6 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Danh sách tiến độ công việc
-                    </h3>
-                </div>
                 <div class="card-body">
                     <table id="schedule_table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
