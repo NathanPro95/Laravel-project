@@ -34,16 +34,16 @@
                     <table id="schedule_table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Contract date</th>
-                                <th>Valuable</th>
-                                <th>Number emp</th>
-                                <th>Plan</th>
-                                <th>Status</th>
-                                <th>End date</th>
-{{--                                @role('admin')--}}
-                                    <th>Process</th>
-{{--                                @endrole--}}
+                                <th>Tên công trình</th>
+                                <th>Ngày hợp đồng</th>
+                                <th>Giá trị HĐ(VNĐ)</th>
+                                <th>Số công nhân</th>
+                                <th>Kế hoạch</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày hoàn thành</th>
+                                @role('admin')
+                                <th>Thao tác</th>
+                                @endrole
                             </tr>
                         </thead>
                         <tbody>
@@ -56,7 +56,7 @@
                                 <td>{{$schedule['construction_plan'] != null ? $schedule['construction_plan'] : ""}}</td>
                                 <td>{{$schedule['schedule_status']}}</td>
                                 <td>{{$schedule['end_date'] != null ? date('d-m-Y',strtotime($schedule['end_date'])) : ""}}</td>
-{{--                                @role('admin')--}}
+                                @role('admin')
                                     <td>
                                         <a href="{{route('schedule.edit',$schedule['id'])}}" style="float: left;margin-right: 5px;" title="Cập nhật"><i class="fa fa-edit"></i></a>
                                         <form action="{{route('schedule.delete',$schedule['id'])}}" method="post">
@@ -65,13 +65,12 @@
                                             <button style="background: unset;border: unset;color: #f70707;" onclick="return confirm('Bạn có chắc chắn muốn xóa '+'{{$schedule['schedule_name']}}' + '?');" type="submit" title="Xóa"><i class="fa fa-trash"></i></button>
                                         </form>
                                     </td>
-{{--                                @endrole--}}
+                                @endrole
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-<<<<<<< Updated upstream
                                 <th>Tên công trình</th>
                                 <th>Ngày hợp đồng</th>
                                 <th>Giá trị HĐ(VNĐ)</th>
@@ -82,18 +81,6 @@
                                 @role('admin')
                                 <th>Thao tác</th>
                                 @endrole
-=======
-                                <th>Name</th>
-                                <th>Contract date</th>
-                                <th>Valuable</th>
-                                <th>Number emp</th>
-                                <th>Plan</th>
-                                <th>Status</th>
-                                <th>End date</th>
-{{--                                @role('admin')--}}
-                                    <th>Process</th>
-{{--                                @endrole--}}
->>>>>>> Stashed changes
                             </tr>
                         </tfoot>
                     </table>
