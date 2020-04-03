@@ -29,6 +29,8 @@ Route::group(['namespace', 'prefix' => 'manageSchedule', 'middleware' => 'auth']
         });
         Route::get('/',['as' => 'schedule.list', 'uses' => 'ScheduleController@index']);
         Route::get('create',['as' => 'schedule.create', 'uses' => 'ScheduleController@create']);
+        Route::get('type',['as' => 'schedule.type', 'uses' => 'ScheduleController@type']);
+        Route::get('plan',['as' => 'schedule.plan', 'uses' => 'ScheduleController@plan']);
         Route::post('store',['as' => 'schedule.store', 'uses' => 'ScheduleController@store']);
         Route::post('import',['as' => 'schedule.import', 'uses' => 'ImportExcelController@import']);
     });
