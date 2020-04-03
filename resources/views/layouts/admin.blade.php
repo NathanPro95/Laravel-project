@@ -231,14 +231,14 @@
                   <p>Danh sách người dùng</p>
                 </a>
               </li>
-{{--              @role('admin')--}}
+              @role('admin')
               <li class="nav-item">
                 <a href="{{route('user.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tạo người dùng mới</p>
                 </a>
               </li>
-{{--              @endrole--}}
+              @endrole
             </ul>
           </li>
 
