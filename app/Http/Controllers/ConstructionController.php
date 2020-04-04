@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Schedule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\models\TrackProgress;
@@ -34,11 +35,14 @@ class ConstructionController extends Controller
     public function detail($id)
     {
         $detailTrackProgress = $this->model->find($id);
-        $detailTrackProgress = $detailTrackProgress->toArray();
-        $sum = (1/10)*$detailTrackProgress['handover_gorund'] + (1/10)*$detailTrackProgress['handover_of_subpplies'] + (8/10)*$detailTrackProgress['construction'];
-        $detailTrackProgress['sum'] = $sum;
-        $detailTrackProgress['work_id'] = ['gorund' => 1, 'subpplies' => 2, 'construction' => 3];
-        return view('admin.construction_schedules.detail', compact('detailTrackProgress'));
+        if($detailTrackProgress != null) {
+            $scheduleName = Schedule::find($detailTrackProgress->schedules_id)->schedule_name;
+            $detailTrackProgress = $detailTrackProgress->toArray();
+            $sum = (1 / 10) * $detailTrackProgress['handover_gorund'] + (1 / 10) * $detailTrackProgress['handover_of_subpplies'] + (8 / 10) * $detailTrackProgress['construction'];
+            $detailTrackProgress['sum'] = $sum;
+            $detailTrackProgress['work_id'] = ['gorund' => 1, 'subpplies' => 2, 'construction' => 3];
+            return view('admin.construction_schedules.detail', compact('detailTrackProgress','scheduleName'));
+        }
     }
     public function detailWork($id)
     {

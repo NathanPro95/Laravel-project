@@ -430,6 +430,9 @@
     } );
     function setActiveNavItem() {
         window.localStorage.active_href = window.location.href;
+        if(window.location.href == "http://localhost:8000/home"){
+            window.localStorage.isDashboard = true;
+        }
         $('.nav-sidebar .nav-link').first().click(function () {
             window.localStorage.isDashboard = true;
         });

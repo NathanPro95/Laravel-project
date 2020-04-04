@@ -13,70 +13,70 @@
                     <table id="schedule_table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Tên Dự Án</th>
-                                <th>Bàn Giao Mặt Bằng</th>
-                                <th>Bàn Giao Vật Tư</th>
-                                <th>Thi Công</th>
-                                <th>Khu Vực</th>
-                                <th>Biên Bản Mặt Bằng</th>
-                                <th>Biên Bản Vật Tư</th>
-                                <th>Ngày Tạo</th>
-                                <th>Ngày Cập Nhật</th>
-                                <th>Chức Năng</th>
+                                <th>Tên công trình</th>
+                                <th>Bàn giao mặt bằng</th>
+                                <th>Bàn giao vật tư</th>
+                                <th>Thi công</th>
+                                <th>Khu vực</th>
+                                <th>Biên bản mặt bằng</th>
+                                <th>Biên bản vật tư</th>
+                                <th>Ngày cập nhật</th>
                             </tr>
                         </thead>
                         <tbody class="track-progress">
                         @foreach($projectStart as $value)
                             <tr>
                                 <td>
-                                    {{$value['schedule_name']}}
+                                    <a href="{{route('construction.detail',$value['id'])}}">
+                                        {{$value['schedule_name']}}
+                                    </a>
                                 </td>
                                 <td>
-                                    <p>{{!empty($value['handover_gorund']) ? $value['handover_gorund'] : 0}}%</p>
+                                    <a href="{{route('construction.detail',$value['id'])}}">
+                                        {{!empty($value['handover_gorund']) ? $value['handover_gorund'] : 0}}%
+                                    </a>
                                 </td>
                                 <td>
-                                    <p>{{!empty($value['handover_of_subpplies']) ? $value['handover_of_subpplies'] : 0}}%</p>
+                                    <a href="{{route('construction.detail',$value['id'])}}">
+                                        {{!empty($value['handover_of_subpplies']) ? $value['handover_of_subpplies'] : 0}}%
+                                    </a>
                                 </td>
                                 <td>
-                                    <p>{{!empty($value['construction']) ? $value['construction'] : 0}} %</p>
+                                    <a href="{{route('construction.detail',$value['id'])}}">
+                                        {{!empty($value['construction']) ? $value['construction'] : 0}} %
+                                    </a>
                                 </td>
                                 <td>
-                                    <p>{{$value['area']}}</p>
+                                    <a href="{{route('construction.detail',$value['id'])}}">
+                                        {{$value['area']}}
+                                    </a>
                                 </td>
                                 <td>
                                     @if(!empty($value['image_handover_ground']))
-                                    <p><img src="{{asset('images')}}/{{$value['image_handover_ground']}}" alt=""></p>
+                                        <img src="{{asset('images')}}/{{$value['image_handover_ground']}}" alt="">
                                     @endif
                                 </td>
                                 <td>
                                     @if(!empty($value['image_handover_supplies']))
-                                    <p><img src="{{asset('images')}}/{{$value['image_handover_supplies']}}" alt=""></p>
+                                        <img src="{{asset('images')}}/{{$value['image_handover_supplies']}}" alt="">
                                     @endif
                                 </td>
                                 <td>
-                                    <p>{{$value['created_at']}}</p>
-                                </td>
-                                <td>
-                                    <p>{{$value['updated_at']}}</p>
-                                </td>
-                                <td>
-                                    <a href="{{route('construction.detail',$value['id'])}}">Detail</a>
+                                    {{$value['updated_at'] != null ? date('d-m-Y',strtotime($value['updated_at'])) : ""}}
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Tên Dự Án</th>
-                                <th>Bàn Giao Mặt Bằng</th>
-                                <th>Bàn Giao Vật Tư</th>
-                                <th>Thi Công</th>
-                                <th>Khu Vực</th>
-                                <th>Biên Bản Mặt Bằng</th>
-                                <th>Biên Bản Vật Tư</th>
-                                <th>Ngày Tạo</th>
-                                <th>Ngày Cập Nhật</th>
-                                <th>Chức Năng</th>
+                                <th>Tên công trình</th>
+                                <th>Bàn giao mặt bằng</th>
+                                <th>Bàn giao vật tư</th>
+                                <th>Thi công</th>
+                                <th>Khu vực</th>
+                                <th>Biên bản mặt bằng</th>
+                                <th>Biên bản vật tư</th>
+                                <th>Ngày cập nhật</th>
                             </tr>
                         </tfoot>
                     </table>
