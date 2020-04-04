@@ -33,21 +33,21 @@
                     </form>
                     <table id="schedule_table" class="table table-striped table-bordered" style="width:100%">
                         <thead>
-                            <tr>
-                                <th>Tên công trình</th>
-                                <th>Ngày hợp đồng</th>
-                                <th>Giá trị HĐ(VNĐ)</th>
-                                <th>Số công nhân</th>
-                                <th>Kế hoạch</th>
-                                <th>Trạng thái</th>
-                                <th>Ngày hoàn thành</th>
-                                @role('admin')
-                                    <th>Thao tác</th>
-                                @endrole
-                            </tr>
+                        <tr>
+                            <th>Tên công trình</th>
+                            <th>Ngày hợp đồng</th>
+                            <th>Giá trị HĐ(VNĐ)</th>
+                            <th>Số công nhân</th>
+                            <th>Kế hoạch</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày hoàn thành</th>
+                            @role('admin')
+                            <th>Thao tác</th>
+                            @endrole
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach($schedules as $schedule)
+                        @foreach($schedules as $schedule)
                             <tr>
                                 <td>{{$schedule['schedule_name']}}</td>
                                 <td>{{$schedule['contract_date'] != null ? date('d-m-Y',strtotime($schedule['contract_date'])) : ""}}</td>
@@ -57,31 +57,31 @@
                                 <td>{{$schedule['schedule_status']}}</td>
                                 <td>{{$schedule['end_date'] != null ? date('d-m-Y',strtotime($schedule['end_date'])) : ""}}</td>
                                 @role('admin')
-                                    <td>
-                                        <a href="{{route('schedule.edit',$schedule['id'])}}" style="float: left;margin-right: 5px;" title="Cập nhật"><i class="fa fa-edit"></i></a>
-                                        <form action="{{route('schedule.delete',$schedule['id'])}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button style="background: unset;border: unset;color: #f70707;" onclick="return confirm('Bạn có chắc chắn muốn xóa '+'{{$schedule['schedule_name']}}' + '?');" type="submit" title="Xóa"><i class="fa fa-trash"></i></button>
-                                        </form>
-                                    </td>
+                                <td>
+                                    <a href="{{route('schedule.edit',$schedule['id'])}}" style="float: left;margin-right: 5px;" title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                    <form action="{{route('schedule.delete',$schedule['id'])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button style="background: unset;border: unset;color: #f70707;" onclick="return confirm('Bạn có chắc chắn muốn xóa '+'{{$schedule['schedule_name']}}' + '?');" type="submit" title="Xóa"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td>
                                 @endrole
                             </tr>
-                            @endforeach
+                        @endforeach
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <th>Tên công trình</th>
-                                <th>Ngày hợp đồng</th>
-                                <th>Giá trị HĐ(VNĐ)</th>
-                                <th>Số công nhân</th>
-                                <th>Kế hoạch</th>
-                                <th>Trạng thái</th>
-                                <th>Ngày hoàn thành</th>
-                                @role('admin')
-                                <th>Thao tác</th>
-                                @endrole
-                            </tr>
+                        <tr>
+                            <th>Tên công trình</th>
+                            <th>Ngày hợp đồng</th>
+                            <th>Giá trị HĐ(VNĐ)</th>
+                            <th>Số công nhân</th>
+                            <th>Kế hoạch</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày hoàn thành</th>
+                            @role('admin')
+                            <th>Thao tác</th>
+                            @endrole
+                        </tr>
                         </tfoot>
                     </table>
                 </div>

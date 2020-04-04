@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="card">
+    <div class="card-body">
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -75,7 +77,7 @@
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade show active inputHandoverGround" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <form id="updateHandoverGround" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
@@ -87,24 +89,12 @@
                             </div>
                         @else
                         <div class="form-group">
-                            <label for="scheduleName">Khu Vực</label>
-                            <input type="text" name="area" class="area form-control" placeholder="Khu Vực">
-                        </div>
-                        <div class="form-group">
                             <label for="scheduleName">Tiến Độ</label>
                             <input type="number" name="finish" class="finish form-control" placeholder="Tiến Độ">
                         </div>
                         <div class="form-group">
-                            <label for="contractDate">Ngày Dự Kiến Hoàn Thành</label>
-                            <input type="date" name="expected_complete_date" class="expected_complete_date form-control">
-                        </div>
-                        <div class="form-group">
                             <label for="valuable">Ghi Chú</label>
                             <textarea style="width: 100%" name="note" class="note"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="endDate">Ngày Kết Thúc</label>
-                            <input type="date" name="end_date" class="end_date form-control" placeholder="Enter schedule status">
                         </div>
                         @endif
                         <input type="hidden" name="track_progress_id" value="{{$detailTrackProgress['id']}}">
@@ -112,11 +102,11 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </div>
                 </form>
             </div>
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="tab-pane fade inputHandoverOfSubpplies" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <form id="updateHandoverOfSubpplies" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
@@ -128,24 +118,12 @@
                             </div>
                         @else
                         <div class="form-group">
-                            <label for="scheduleName">Khu Vực</label>
-                            <input type="text" name="area" class="areaSubpplies form-control" placeholder="Khu Vực">
-                        </div>
-                        <div class="form-group">
                             <label for="scheduleName">Tiến Độ</label>
                             <input type="number" name="finish" class="finishSubpplies form-control" placeholder="Tiến Độ">
                         </div>
                         <div class="form-group">
-                            <label for="contractDate">Ngày Dự Kiến Hoàn Thành</label>
-                            <input type="date" name="expected_complete_date" class="expected_complete_date_subpplies form-control">
-                        </div>
-                        <div class="form-group">
                             <label for="valuable">Ghi Chú</label>
                             <textarea style="width: 100%" name="note" class="noteSubpplies"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="endDate">Ngày Kết Thúc</label>
-                            <input type="date" name="end_date" class="end_dateSubpplies form-control" placeholder="Enter schedule status">
                         </div>
                         @endif
                         <input type="hidden" name="track_progress_id" class="track_progress_id" value="{{$detailTrackProgress['id']}}">
@@ -153,7 +131,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </div>
                 </form>
             </div>
@@ -190,16 +168,18 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    </div>
+</div>
     <script>
         function updateSchedule(id){
-            $('.nav-item').removeClass('active');
-            $('.activeForm-'+id).addClass('active');
+            $('#nav-tab .nav-item').removeClass('active');
+            $('.activeForm-'+id).trigger('click');
         }
         jQuery(document).ready(function($) {
             $('#updateHandoverOfSubpplies').on('submit',function(event){
@@ -236,6 +216,20 @@
                         $('.sum').html(sum + '<sup style="font-size: 20px">%</sup> <p>Bàn Giao Mặt Bằng</p>');
                         $('.sum').html(sum + '%');
                         $('.sum').css('width', sum + '%');
+                        if(data.handover_of_subpplies == 100){
+                            $('.inputHandoverOfSubpplies').html('<form method="post" action="{{(route("construction.post.update"))}}" role="form" enctype="multipart/form-data">\n' +
+                                '                    @csrf\n' +
+                                '                    <input type="hidden" name="handover_of_subpplies" class="handover_of_subpplies" value="Biên Bản Vật Tư">' +
+                                '                            <div class="form-group">\n' +
+                                '                                <label for="scheduleName">Biên Bản Bàn Giao</label>\n' +
+                                '                                <input type="file" name="protocol" class="protocolSubpplies form-control" placeholder="Enter schedule name">\n' +
+                                '                            </div>\n' +
+                                '                            <input type="hidden" name="track_progress_id" class="track_progress_id" value="{{$detailTrackProgress["id"]}}">\n' +
+                                '                    <div class="card-footer">\n' +
+                                '                        <button type="submit" class="btn btn-primary">Cập nhật</button>\n' +
+                                '                    </div>\n' +
+                                '                </form>');
+                        }
                     },
                 });
             });
@@ -276,6 +270,20 @@
                         $('.sum').html(sum + '<sup style="font-size: 20px">%</sup> <p>Bàn Giao Mặt Bằng</p>');
                         $('.sum').html(sum + '%');
                         $('.sum').css('width', sum + '%');
+                        if(data.handover_gorund == 100){
+                            $('.inputHandoverGround').html('<form method="post" action="{{(route("construction.post.update"))}}" role="form" enctype="multipart/form-data">\n' +
+                                '                    @csrf\n' +
+                                '                    <input type="hidden" name="handover_ground" class="handover_ground" value="Bàn Giao Mặt Bằng">' +
+                                '                            <div class="form-group">\n' +
+                                '                                <label for="scheduleName">Biên Bản Bàn Giao</label>\n' +
+                                '                                <input type="file" name="protocol" class="protocolSubpplies form-control" placeholder="Enter schedule name">\n' +
+                                '                            </div>\n' +
+                                '                            <input type="hidden" name="track_progress_id" class="track_progress_id" value="{{$detailTrackProgress["id"]}}">\n' +
+                                '                    <div class="card-footer">\n' +
+                                '                        <button type="submit" class="btn btn-primary">Cập nhật</button>\n' +
+                                '                    </div>\n' +
+                                '                </form>');
+                        }
                     },
                 });
             });

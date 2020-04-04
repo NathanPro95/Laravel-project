@@ -124,4 +124,14 @@ class ScheduleController extends Controller
     {
         //
     }
+
+    public function plan()
+    {
+        return view('admin/schedules/schedule_plan');
+    }
+
+    public function type()
+    {
+        return view('admin/schedules/schedule_type');
+    }
 }

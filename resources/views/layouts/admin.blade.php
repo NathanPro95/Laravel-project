@@ -209,7 +209,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{route('home')}}" class="nav-link active">
+            <a href="{{route('home')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -231,14 +231,14 @@
                   <p>Danh sách người dùng</p>
                 </a>
               </li>
-{{--              @role('admin')--}}
+              @role('admin')
               <li class="nav-item">
                 <a href="{{route('user.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tạo người dùng mới</p>
                 </a>
               </li>
-{{--              @endrole--}}
+              @endrole
             </ul>
           </li>
 
@@ -246,7 +246,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Quản lý công việc
+                  Quản lý công trình
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -254,30 +254,26 @@
               <li class="nav-item">
                 <a href="{{route('schedule.list')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Quản lý loại công trình</p>
+                  <p>Danh sách công trình</p>
                 </a>
-
+              </li>
+              <li class="nav-item">
+                <a href="{{route('schedule.plan')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lập kế hoạch</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('schedule.type')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Loại công trình</p>
+                </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('schedule.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Quản lý công trình</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <p>Tạo công trình</p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('schedule.list')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Danh sách công trình</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('schedule.create')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tạo công trình</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
             </ul>
           </li>
@@ -293,17 +289,17 @@
               <li class="nav-item">
                 <a href="{{route('construction.list')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách tiến độ công việc</p>
+                  <p>D/s tiến độ công việc</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('schedule.create')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Báo cáo tiến độ thi công</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('schedule.create')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Cảnh báo tiến độ</p>
                 </a>
@@ -320,7 +316,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('schedule.list')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách hoàn công</p>
                 </a>
@@ -411,26 +407,45 @@
 <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
 <script>
     $(document).ready(function() {
-    $('#schedule_table').DataTable({
-        language: {
-            "sProcessing":   "Đang xử lý...",
-            "sLengthMenu":   "Xem _MENU_ mục",
-            "sZeroRecords":  "Không tìm thấy dòng nào phù hợp",
-            "sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-            "sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
-            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-            "sInfoPostFix":  "",
-            "sSearch":       "Tìm kiếm:",
-            "sUrl":          "",
-            "oPaginate": {
-                "sFirst":    "Đầu",
-                "sPrevious": "Trước",
-                "sNext":     "Tiếp",
-                "sLast":     "Cuối"
+        setActiveNavItem();
+        $('#schedule_table').DataTable({
+            language: {
+                "sProcessing":   "Đang xử lý...",
+                "sLengthMenu":   "Xem _MENU_ mục",
+                "sZeroRecords":  "Không tìm thấy dòng nào phù hợp",
+                "sInfo":         "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                "sInfoEmpty":    "Đang xem 0 đến 0 trong tổng số 0 mục",
+                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                "sInfoPostFix":  "",
+                "sSearch":       "Tìm kiếm:",
+                "sUrl":          "",
+                "oPaginate": {
+                    "sFirst":    "Đầu",
+                    "sPrevious": "Trước",
+                    "sNext":     "Tiếp",
+                    "sLast":     "Cuối"
+                }
             }
+        });
+    } );
+    function setActiveNavItem() {
+        window.localStorage.active_href = window.location.href;
+        $('.nav-sidebar .nav-link').first().click(function () {
+            window.localStorage.isDashboard = true;
+        });
+        $('.nav-treeview .nav-item .nav-link').click(function (e) {
+            window.localStorage.active_href = $(this).attr('href');
+            window.localStorage.isDashboard = false;
+        });
+
+        if(window.localStorage.isDashboard == "true"){
+            $('.nav-sidebar .nav-link').first().addClass('active');
+        }else {
+            $($('.nav-treeview .nav-item').find($("a[href='" + window.localStorage.active_href + "']"))).addClass('active');
+            $($('.nav-treeview .nav-item').find($("a[href='" + window.localStorage.active_href + "']"))).closest('.has-treeview').addClass('menu-open');
+            $($('.nav-treeview .nav-item').find($("a[href='" + window.localStorage.active_href + "']"))).closest('.has-treeview').find('.nav-link:first').addClass('active');
         }
-    });
-} );
+    }
 </script>
 </body>
 </html>
