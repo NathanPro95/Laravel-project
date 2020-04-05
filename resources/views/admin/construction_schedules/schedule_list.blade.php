@@ -21,6 +21,7 @@
                                 <th>Biên bản mặt bằng</th>
                                 <th>Biên bản vật tư</th>
                                 <th>Ngày cập nhật</th>
+                                <th>Chức Năng</th>
                             </tr>
                         </thead>
                         <tbody class="track-progress">
@@ -33,7 +34,7 @@
                                 </td>
                                 <td>
                                     <a href="{{route('construction.detail',$value['id'])}}">
-                                        {{!empty($value['handover_gorund']) ? $value['handover_gorund'] : 0}}%
+                                        {{!empty($value['handover_ground']) ? $value['handover_ground'] : 0}}%
                                     </a>
                                 </td>
                                 <td>
@@ -64,6 +65,9 @@
                                 <td>
                                     {{$value['updated_at'] != null ? date('d-m-Y',strtotime($value['updated_at'])) : ""}}
                                 </td>
+                                <td>
+                                    <a href="{{route('construction.detail', $value['id'])}}" title="">Detail</a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -77,6 +81,7 @@
                                 <th>Biên bản mặt bằng</th>
                                 <th>Biên bản vật tư</th>
                                 <th>Ngày cập nhật</th>
+                                <th>Chức Năng</th>
                             </tr>
                         </tfoot>
                     </table>

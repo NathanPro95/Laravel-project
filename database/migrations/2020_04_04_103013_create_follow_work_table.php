@@ -16,16 +16,18 @@ class CreateFollowWorkTable extends Migration
         Schema::create('follow_work', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('image');
+            $table->string('area');
             $table->integer('finish');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->dateTime('expected_complete_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->bigInteger('track_progress_id')->unsigned();
             $table->foreign('track_progress_id')
                 ->references('id')->on('track_progress')
                 ->onDelete('cascade');
-            $table->integer('parent_id')->nullable();
+            $table->bigInteger('item_id')->unsigned();
+            $table->foreign('item_id')
+                ->references('id')->on('construction_items');
             $table->timestamps();
         });
     }
