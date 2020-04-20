@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['namespace', 'prefix' => 'manageSchedule', 'middleware' => 'auth'], function() {
+Route::group(['namespace', 'prefix' => 'manageSchedule'], function() {
 
     Route::group(['prefix' => 'schedule'], function() {
         Route::group(['middleware' => 'role:admin'],function (){
@@ -50,5 +50,11 @@ Route::group(['namespace', 'prefix' => 'manageSchedule', 'middleware' => 'auth']
         Route::get('detail-work/{id}',['as' => 'construction.detailwork', 'uses' => 'ConstructionController@detailWork']);
         Route::post('update',['as' => 'construction.post.update', 'uses' => 'ConstructionController@postUpdate']);
         Route::post('update-contruction',['as' => 'construction.post.updateConstruction', 'uses' => 'ConstructionController@postUpdateConstruction']);
+    });
+    Route::group(['prefix' => 'construction_item'], function() {
+        Route::get('/',['as' => 'construction_item.list', 'uses' => 'ContructionItemController@index']);
+        Route::post('add',['as' => 'construction_item.add', 'uses' => 'ContructionItemController@add']);
+        Route::get('getid/{id}',['as' => 'construction_item.getid', 'uses' => 'ContructionItemController@getid']);
+        Route::post('update-contruction',['as' => 'construction_item.edit', 'uses' => 'ConstructionController@postUpdateConstruction']);
     });
 });

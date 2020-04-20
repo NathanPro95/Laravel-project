@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddImageToTrackProgress extends Migration
+class CreateConstructionItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddImageToTrackProgress extends Migration
      */
     public function up()
     {
-        Schema::table('track_progress', function (Blueprint $table) {
-            //
-            $table->string('image')->nullable();
+        Schema::create('construction_items', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name_item');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +27,6 @@ class AddImageToTrackProgress extends Migration
      */
     public function down()
     {
-        Schema::table('follow_work', function (Blueprint $table) {
-            //
-            $table->dropColumn(['image']);
-        });
+        Schema::dropIfExists('construction_items');
     }
 }

@@ -15,12 +15,14 @@ class CreateTrackProgressTable extends Migration
     {
         Schema::create('track_progress', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('handover_gorund')->nullable();
-            $table->integer('handover_of_subpplies')->nullable();
-            $table->integer('construction')->nullable();
+            $table->integer('handover_ground')->default(0);
+            $table->integer('handover_of_subpplies')->default(0);
+            $table->integer('construction')->default(0);
             $table->string('area')->nullable();
-            $table->bigInteger('schedules_id')->unsigned();
-            $table->foreign('schedules_id')
+            $table->string('image_handover_ground')->nullable();
+            $table->string('image_handover_supplies')->nullable();
+            $table->bigInteger('schedule_id')->unsigned();
+            $table->foreign('schedule_id')
                 ->references('id')->on('schedules')
                 ->onDelete('cascade');
 
